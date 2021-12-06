@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" default="worlds/empty_world" />
+    </include>
+
+    <node pkg="follow_bot" type="follower.py" name="follower" output="screen" />
+    <group ns="/steer_bot">
+        <include file="$(find follow_bot)/launch/robot.launch">
+            <arg name="name" value="steer_bot" />
+            <arg name="x" value="2" />
+            <arg name="y" value="1" />
+        </include>
+    </group>
+
+    <group ns="/follow_bot">
+        <include file="$(find follow_bot)/launch/robot.launch">
+            <arg name="name" value="follow_bot" />
+            <arg name="x" value="0" />
+            <arg name="y" value="0" />
+        </include>
+    </group>
+</launch>
